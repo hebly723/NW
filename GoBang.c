@@ -26,6 +26,9 @@ int main()
 	#ifdef DEBUG
 	showHand(a);
 	#endif
+	#ifndef DEBUG
+	printf("\033[2J");
+	#endif
 	showGo(go);
 	do{
 		printf("----------------------------------------\n");
@@ -36,9 +39,16 @@ int main()
 		}
 		printf("----------------------------------------\n");
 		go[player_x-1][player_y-1] = 1;
+		//deepl(player_x-1, player_y-1, 1);
 		deepl(player_x-1, player_y-1, 1);
+
 		disDeep();
+		#ifndef DEBUG
+		printf("\033[2J");
+		#endif
+
 		showGo(go);
+		//deepl(player_x-1, player_y-1, 1);
 	}while(player_x<16&&player_y<16);
 	//show(go);
 	return 0;
@@ -55,25 +65,33 @@ void showGo(int go[][15])
 	#endif
 	printf("\n");
 	#ifndef DEBUG
-	printf("\t1   2   3   4   5   6   7   8   9   10  11  12  13  14  15\n");
+	printf("\t\033[32m1    2    3    4    5    6    7    8    9    10   11   12   13   14   15\n");
 	#endif
 	#ifdef DEBUG
-	printf("\t1  2  3  4  5  6  7  8  9  10 11 12 13 14 15\n");
+	printf("\t\033[32m1   2   3   4   5  6  7  8  9  10 11 12 13 14 15\033[0m\n");
 	#endif
 	for (i=0;i<15;i++)
 	{
 			//#ifndef DEBUG
-			printf("%d\t", i+1);
+			printf("\033[32m%d\t\033[0m", i+1);
 			//#endif
 			for (j=0;j<15;j++)
 			{
-				printf("%d", go[i][j]);
+				printf("\033[40m");
+				if (go[i][j] == 0)
+					printf("\033[30m%d\033[0m", /*go[i][j]*/10);
+				//printf("%d", go[i][j]);
+				else if(go[i][j] == 1)
+					printf("\033[43m\033[33m%d\033[0m", /*go[i][j]*/10);
+				else if(go[i][j] == 2)
+					printf("\033[44m\033[34m%d\033[0m", /*go[i][j]*/10);
 				printf("  ");
 				#ifndef DEBUG
 				printf(" ");
 				#endif
+				//printf("\33[0m");
 			}
-			printf("|");
+			printf("\033[32m|\033[0m");
 			#ifdef DEBUG
 			for (j=0;j<15;j++)
 			{
@@ -83,7 +101,7 @@ void showGo(int go[][15])
 				printf("*");
 				printf("  ");
 			}
-			printf("|");
+			printf("\033[32m|\033[0m");
 			#endif
 			#ifdef DEBUG
 			for (j=0;j<15;j++)
@@ -120,6 +138,7 @@ void disDeep()
 	int x_a=8, y_a=8;
 	int x_w=8, y_w=8;
 	int flag = 0;//等于0时默认防守，等于一时默认进攻
+	int t = 1;//算随机位置时叠加的步长
 	//只有空位能参与寻路算法
 	for (i=0;i<15;i++)
 	{
@@ -158,8 +177,43 @@ void disDeep()
 		}
 		else
 		{
-			x_w++;
-			y_w++;
+			if (go[x_w+a[0].x][y_w+a[0].y]==0)
+			{
+				x_w = x_w + a[0].x;
+				y_w = y_w + a[0].y;
+				go[x_w][y_w] = 2;
+				break;
+
+			}
+			else if (go[x_w+a[1].x][y_w+a[1].y]==0)
+			{
+				x_w = x_w + a[1].x;
+				y_w = y_w + a[1].y;
+				go[x_w][y_w] = 2;
+				break;
+
+			}
+			else if (go[x_w+a[2].x][y_w+a[2].y]==0)
+			{
+				x_w = x_w + a[2].x;
+				y_w = y_w + a[2].y;
+				go[x_w][y_w] = 2;
+				break;
+
+			}
+			else if (go[x_w+a[3].x][y_w+a[3].y]==0)
+			{
+				x_w = x_w + a[3].x;
+				y_w = y_w + a[3].y;
+				go[x_w][y_w] = 2;
+				break;
+
+			}
+			else
+			{
+				x_w = x_w + a[0].x;
+				y_w = y_w + a[0].y;
+			}
 		}
 		}
 	}
@@ -320,9 +374,15 @@ int deepl(int x, int y, int color)
 	if (max>=5&&color==go[x][y]&&color!=0)
 	{
 		if (color==1)
+		{
+			showGo(go);
 			printf("你赢了\n");
+		}
 		else if (color == 2)
+		{
+			showGo(go);
 			printf("你输了\n");
+		}
 		exit(0);
 	}
 	return max;
