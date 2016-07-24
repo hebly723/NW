@@ -349,7 +349,8 @@ int deep(int cx, int cy, int num, int color)
 /**************************************************/
 int deepl(int x, int y, int color)
 {
-	//int count = 0;
+	//int count = 0;printf("\033[2J");
+
 	int a=0, b=0, c=0, d=0;
 	int max = a;
 	a = deep(x, y, 0, color);
@@ -375,11 +376,13 @@ int deepl(int x, int y, int color)
 	{
 		if (color==1)
 		{
+			printf("\033[2J");
 			showGo(go);
 			printf("你赢了\n");
 		}
 		else if (color == 2)
 		{
+			printf("\033[2J");
 			showGo(go);
 			printf("你输了\n");
 		}
