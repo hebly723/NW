@@ -65,15 +65,18 @@ void showGo(int go[][15])
 	#endif
 	printf("\n");
 	#ifndef DEBUG
-	printf("\t\033[32m1    2    3    4    5    6    7    8    9    10   11   12   13   14   15\n");
+	printf("   \033[32m1    2    3    4    5    6    7    8    9    10   11   12   13   14   15\n");
 	#endif
 	#ifdef DEBUG
-	printf("\t\033[32m1   2   3   4   5  6  7  8  9  10 11 12 13 14 15\033[0m\n");
+	printf("   \033[32m1   2   3   4   5  6  7  8  9  10 11 12 13 14 15\033[0m\n");
 	#endif
 	for (i=0;i<15;i++)
 	{
 			//#ifndef DEBUG
-			printf("\033[32m%d\t\033[0m", i+1);
+			if (i<9)
+			printf("\033[32m%d  \033[0m", i+1);
+			else
+			printf("\033[32m%d \033[0m", i+1);
 			//#endif
 			for (j=0;j<15;j++)
 			{
