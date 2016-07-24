@@ -5,6 +5,8 @@
 /*玩家下子在对应区域记为1,电脑下子在对应区域记2,
 空白区域为0,定义,存储下子位置的数组与存储可能性的数
 组作为全局变量使用*/
+/*残留问题：电脑不会优先选取气最多的棋子进行堵截
+以一种诡异的方式暂时解决了*/
 /**************************************************/
 void showGo(int go[][15]);
 typedef struct Hand{
@@ -21,7 +23,9 @@ hand a[4] = { {-1,0}, {-1,1},{0,1},{1,1}};
 int main()
 {
 	int player_x=1, player_y=1;
+	#ifdef DEBUG
 	showHand(a);
+	#endif
 	showGo(go);
 	do{
 		printf("----------------------------------------\n");
@@ -32,6 +36,7 @@ int main()
 		}
 		printf("----------------------------------------\n");
 		go[player_x-1][player_y-1] = 1;
+		deepl(player_x-1, player_y-1, 1);
 		disDeep();
 		showGo(go);
 	}while(player_x<16&&player_y<16);
@@ -41,15 +46,35 @@ int main()
 void showGo(int go[][15])
 {
 	int i=0, j=0;
-	printf("\t\t\tgo\t\t\t\t\tplay_sum\t\t\t\t\tai_sum\n");
+	#ifdef DEBUG
+	printf("\t");
+	#endif
+	printf("\t\t\tgo");
+	#ifdef DEBUG
+	printf("\t\t\t\t\tplay_sum\t\t\t\t\tai_sum");
+	#endif
+	printf("\n");
+	#ifndef DEBUG
+	printf("\t1   2   3   4   5   6   7   8   9   10  11  12  13  14  15\n");
+	#endif
+	#ifdef DEBUG
+	printf("\t1  2  3  4  5  6  7  8  9  10 11 12 13 14 15\n");
+	#endif
 	for (i=0;i<15;i++)
 	{
+			//#ifndef DEBUG
+			printf("%d\t", i+1);
+			//#endif
 			for (j=0;j<15;j++)
 			{
 				printf("%d", go[i][j]);
 				printf("  ");
+				#ifndef DEBUG
+				printf(" ");
+				#endif
 			}
 			printf("|");
+			#ifdef DEBUG
 			for (j=0;j<15;j++)
 			{
 				if (play_sum[i][j]!=-1)
@@ -59,12 +84,15 @@ void showGo(int go[][15])
 				printf("  ");
 			}
 			printf("|");
+			#endif
+			#ifdef DEBUG
 			for (j=0;j<15;j++)
 			{
 				printf("%d", ai_sum[i][j]);
 				printf("  ");
 			}
 			printf("|");
+			#endif
 		printf("\n\n");
 	}
 }
@@ -102,15 +130,17 @@ void disDeep()
 				ai_sum[i][j] = deepl(i ,j, 2);
 			}
 			else
+			{
 				play_sum[i][j] = 0;
-			if (play_sum[i][j]>max_p)
+				ai_sum[i][j] = 0;
+			}
+			if (play_sum[i][j]>=max_p)
 			{
 				x_p = i;
 				y_p = j;
 				max_p = play_sum[i][j];
 			}
-			
-			if (ai_sum[i][j]>max_a)
+			if (ai_sum[i][j]>=max_a)
 			{
 				x_a = i;
 				y_a = j;
@@ -118,7 +148,14 @@ void disDeep()
 			}
 		}
 	}
-	//优先级待完成，目前只有围追堵截
+	//怎么判断棋局已经结束了？下子的那一刻之后就应该有答案，而不是等到下一局进行判断
+	//未考虑两子情况优先选择己方连子（待考虑）（解决）
+	if (deepl(x_a, y_a, 1) >= max_p)
+	{
+		x_p = x_a;
+		y_p = y_a;
+	}
+	//优先级待完成，目前只有围追堵截（还行）
 	if (max_a>max_p)
 		flag=1;
 	else if (max_a<max_p)
@@ -131,9 +168,16 @@ void disDeep()
 			flag = 0;
 	}
 	if (flag==0)
+	{
 		go[x_p][y_p] = 2;
+		deepl(x_p, y_p, 2);
+	}
 	else
+	{
 		go[x_a][y_a] = 2;
+		deepl(x_a, y_a, 2);
+	}
+	
 
 }
 /**************************************************/
@@ -152,23 +196,31 @@ int deep(int cx, int cy, int num, int color)
 	int conti = 1;
 	//empty是直接相连的棋子数加上空子数（大于5就行），计算棋子是否有下的必要
 	int empty = 0;
+	#ifdef DEBUG
+	if (x<3)
+	printf("当前坐标为%d, %d\n", x, y);
+	#endif
 	//忘了考虑边界情况（x+a[a_num]为非法值的时候），之后考虑(已考虑)，注释掉的区域代表的判断棋子是否有下的必要的部分，具体写法待商榷（已完成）
 	if (x+a[num].x>=0&&x+a[num].x<15&&y+a[num].y>=0&&y+a[num].y<15)
 	{
-		while (go[x+a[num].x][y+a[num].y]==color||(go[x+a[num].x][y+a[num].y]==0&&empty<5))
+		while ((go[x+a[num].x][y+a[num].y]==color||(go[x+a[num].x][y+a[num].y]==0&&empty<5))&&(x+a[num].x>=0&&x+a[num].x<15&&y+a[num].y>=0&&y+a[num].y<15))
 		{
-			if (go[x+a[num].x][y+a[num].y]==color && conti == 1)
+			x = x + a[num].x;
+			y = y + a[num].y;
+			if (go[x][y]==color && conti == 1)
 			{
-				printf("你进来了，位置是%d, %d\n, 计数为%d\n, 颜色为%d", x, y, count, go[x+a[num].x][y+a[num].y]);
+				#ifdef DEBUG
+				printf("你进来了，位置是%d, %d, 计数为%d, 颜色为%d\n", x, y, count, go[x][y]);
+				#endif
 				count++;
+				#ifdef DEBUG
 				printf("%d\n", count);
+				#endif
 			}
 			else
 			{
 				conti = 0;
 			}
-			x = x + a[num].x;
-			y = y + a[num].y;
 			if (!(x>=0&&x<15&&y>=0&&y<15))
 				break;
 			empty++;
@@ -179,25 +231,37 @@ int deep(int cx, int cy, int num, int color)
 	conti = 1;
 	if (x-a[num].x>=0&&x-a[num].x<15&&y-a[num].y>=0&&y-a[num].y<15)
 	{	
-		while (go[x-a[num].x][y-a[num].y]==color||(go[x-a[num].x][y-a[num].y]==0&&empty<5))
+		while ((go[x-a[num].x][y-a[num].y]==color||(go[x-a[num].x][y-a[num].y]==0&&empty<5))&&(x-a[num].x>=0&&x-a[num].x<15&&y-a[num].y>=0&&y-a[num].y<15))
 		{
-			if (go[x-a[num].x][y-a[num].y]==color&&conti == 1)
+			x = x - a[num].x;
+			y = y - a[num].y;
+			if (go[x][y]==color&&conti == 1)
 			{
-				printf("你进来了，位置是%d, %d\n, 计数为%d\n", x, y, count);
+				#ifdef DEBUG
+				printf("你进来了，位置是%d, %d, 计数为%d\n", x, y, count);
+				#endif
 				count++;
+				#ifdef DEBUG
 				printf("%d\n", count);
+				#endif
 			}
 			else
 			{
 				conti = 0;
 			}
-			x = x - a[num].x;
-			y = y - a[num].y;
 			if (!(x>=0&&x<15&&y>=0&&y<15))
 				break;
 			empty++;
 		}
 	}
+	//if (count>5)
+	//{
+	//	if (color==1)
+	//		printf("你赢了");
+	//	else if (color == 2)
+	//		printf("你输了");
+	//	exit(0);
+	//}
 	if (empty<5)
 		return -1;
 	else
@@ -218,15 +282,28 @@ int deepl(int x, int y, int color)
 	c = deep(x, y, 2, color);
 	d = deep(x, y, 3, color);
 	max = a;
+	#ifdef DEBUG
+	if (x<4)
 	printf("x =%d ;y =%d ; a =%d ; b =%d ; c =%d ; d =%d ;\n",  x, y, a, b, c, d );
+	#endif
 	if (b > max)
 		max = b;
 	if (c > max)
 		max = c;
 	if (d > max)
 		max = d;
+	#ifdef DEBUG
+	if (x<4)
 	printf("x =%d ;y =%d ; a =%d ; b =%d ; c =%d ; d =%d ; max = %d;\n",  x, y, a, b, c, d, max );
-
+	#endif
+	if (max>=5&&color==go[x][y]&&color!=0)
+	{
+		if (color==1)
+			printf("你赢了\n");
+		else if (color == 2)
+			printf("你输了\n");
+		exit(0);
+	}
 	return max;
 }
 
