@@ -118,6 +118,7 @@ void disDeep()
 	int max_a = 0;
 	int x_p=8, y_p=8;
 	int x_a=8, y_a=8;
+	int x_w=8, y_w=8;
 	int flag = 0;//等于0时默认防守，等于一时默认进攻
 	//只有空位能参与寻路算法
 	for (i=0;i<15;i++)
@@ -148,6 +149,21 @@ void disDeep()
 			}
 		}
 	}
+	if (max_p == max_a&&max_a == 1)
+	{
+		while (1){
+		if (go[x_w][y_w] == 0){
+			go[x_w][y_w] = 2;
+			break;
+		}
+		else
+		{
+			x_w++;
+			y_w++;
+		}
+		}
+	}
+	else{
 	//怎么判断棋局已经结束了？下子的那一刻之后就应该有答案，而不是等到下一局进行判断
 	//未考虑两子情况优先选择己方连子（待考虑）（解决）
 	if (deepl(x_a, y_a, 1) >= max_p)
@@ -177,7 +193,7 @@ void disDeep()
 		go[x_a][y_a] = 2;
 		deepl(x_a, y_a, 2);
 	}
-	
+	}
 
 }
 /**************************************************/
@@ -254,6 +270,11 @@ int deep(int cx, int cy, int num, int color)
 			empty++;
 		}
 	}
+	//对边界情况的判断
+	if ((cx==0||cx==14||cy==0||cy==14)&&count<4)
+		count = 1;
+	if ((cx==1||cx==13||cy==1||cy==13)&&count<3)
+		count = 1;
 	//if (count>5)
 	//{
 	//	if (color==1)
