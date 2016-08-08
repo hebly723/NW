@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=Ugwf7ssw_T-Y4bsdVDPHPhPR9NEESRNHOF-E8IRqEJk1"/>
+		<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleClear/bundle-SimpleClear.css?v=EVOKy_9d-0OzsDt7Iaw0OHSiRqKJoQVRFQeK_xCGZ6c1"/>
+		<link type="text/css" rel="stylesheet" href="/blog/customcss/133816.css?v=ywxzTbV%2b2OE%2bOBzQ0AZQvXcKb58%3d"/>
+		<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/xdp-gacl/rss"/>
+		<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/xdp-gacl/rsd.xml"/>
+		<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/xdp-gacl/wlwmanifest.xml"/>
+		<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+		<script type="text/javascript">var currentBlogApp = 'xdp-gacl', cb_enable_mathjax=false;</script>
+		<script src="/bundles/blog-common.js?v=CCbQEPta1Erql3ywwm_IMnnHBEhRyL7F1vfq8go_1rY1" type="text/javascript"></script>	
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<title>
+		阿里云mysql完全卸载后安装，设置远程可连接
+	</title>
+	</head>
+	<body>
+		<h1>	
+			阿里云mysql完全卸载后安装，设置远程可连接
+		</h1>
+		<h2>
+			阿里云mysql完全卸载
+		</h2>
+		<p>
+			sudo apt-get autoremove --purge mysql-server-5.5//建议根据自己server版本，我是5.5的<br/>
+			sudo apt-get remove mysql-server<br/>
+			sudo apt-get autoremove mysql-server<br/>
+			sudo apt-get remove mysql-common //这个很重要<br/>
+			上面的其实有一些是多余的。<br/>
+			dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P//清除残留数据<br/>
+		</p>
+		<h2>
+			阿里云mysql安装
+		</h2>
+		<p>
+			sudo apt-get install mysql-server//此时加一个-，然后敲击多次tab键，可以选择较新版本安装<br/>
+			apt-get isntall mysql-client<br/>
+			sudo apt-get install libmysqlclient-dev<br/>
+			sudo netstat -tap | grep mysql//此时看到mysql对应的socket处于listen状态的话,表示安装成功<br/>
+		</p>
+		<h2>
+			远程链接
+		</h2>
+		<p>
+			1、任何远程主机都可以访问数据库  <br/>
+
+			mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'WITH GRANT OPTION;     <br/>
+
+			需要输入次命令使修改生效<br/>
+
+			mysql> FLUSH PRIVILEGES;     <br/> 
+
+			退出<br/>
+
+			mysql> EXIT     <br/>
+
+ 
+
+			2、打开/etc/mysql/my.cnf文件，bind-address = ********一句前边加上 # ，注释掉<br/>
+
+			再加上一下两句：<br/>
+
+			skip-external-locking<br/>
+
+			skip-name-resolve<br/>
+
+			很重要的一步！！！重启mysql： service mysql restart <br/>
+
+ 
+
+			以上两步还有问题的话，再看下面。<br/>
+
+			3、sudo apt-get install mysql-server mysql-client[2]组件安装全。<br/>
+		</p>
+		<h3>
+		</h3>
+		<div class="cnblogs_code">
+		附：测试程序
+		<pre>
+#include &ltmysql/mysql.h&gt
+#include &ltstdio.h&gt
+#include &ltstdlib.h&gt
+int main()
+{
+    MYSQL *conn;
+    MYSQL_RES *res;
+    MYSQL_ROW row;
+    char server[] = "localhost";//可以服务器上使用这个程序，检测mysql是否能本地连接，将字符串改为域名ip之后可以在其他电脑上测试是否能远程访问
+    char user[] = "root";
+    char password[] = "mima";
+    char database[] = "mysql";
+    conn = mysql_init(NULL);
+    
+    if (!mysql_real_connect(conn, server,user, password, database, 0, NULL, 0))
+    {
+        fprintf(stderr, "%s\n", mysql_error(conn));
+        exit(1);
+    }
+    if (mysql_query(conn, "show tables"))
+    {
+        fprintf(stderr, "%s\n", mysql_error(conn));
+        exit(1);
+    }
+    
+    res = mysql_use_result(conn);
+    printf("MySQL Tables in mysql database:\n");
+    while ((row = mysql_fetch_row(res)) != NULL)
+    {
+        printf("%s \n", row[0]);
+    }
+    mysql_free_result(res);
+    mysql_close(conn);
+    printf("finish! \n");
+    return 0;
+}</pre>
+编译命令：g++ -Wall mysql_test.cpp -o mysql_test -lmysqlclient<br/>
+		</div>
+	</body>
+</html>
