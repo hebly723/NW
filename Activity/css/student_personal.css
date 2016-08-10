@@ -1,0 +1,84 @@
+body{
+	background-image: url(../img/index/hit1.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-color: #FFFBF0;
+	min-height: 600px;
+}
+.locate{
+	font-size: 16px;
+	position: relative;
+	margin-top: 50px;
+	margin-left: 20px;
+	width:350px;
+	border-bottom: 2px #aaa solid;
+}
+
+.personal{
+	margin-top: 100px;
+}
+
+.list-group{
+	background-color: rgba(0,0,0,0.2);
+}
+
+.list-group-item a{
+	color:#121212;
+	font-size: 16px;
+}
+
+.tab-pane{
+	border:1px #ccc solid;
+	background-color: rgba(255,251,240,0.6);
+	padding:50px;
+}
+.password1,.password2{
+	margin-bottom: 20px;
+	width:300px;
+	margin:0 auto 20px;
+}
+#changePassword button{
+	float:right;
+}
+.infor-item{
+	width:600px;
+	margin:0 auto 20px;
+	padding:10px;
+	color:#121212;
+	transition:background-color 1.5s;
+}
+.infor-item:hover{
+	background-color: rgba(0,0,0,0.1);
+}
+.infor_person{
+	color:red;
+}
+.infor_time{
+	color:blue;
+}
+.response{
+	background-color: gold;
+	border:gold;
+	margin-left: 520px;
+	margin-top: -10px;
+}
+.response:hover{
+	background-color: orange;
+}
+#response{
+	margin-top: 10%;
+}
+.modal-header{
+	height:50px;
+}
+.modal-body textarea{
+	resize:none;
+	height:100px;
+}
+.join-item{
+	width:600px;
+	margin:0 auto 20px;
+	padding:10px;
+	color:#121212;
+	background-color: rgba(143,201,63,0.2);
+}

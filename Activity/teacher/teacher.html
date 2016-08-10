@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>哈工大学生活动信息平台-教师页</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/teacher.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.min.css">
+</head>
+<body>
+	<section class="head">
+		<div class="head_header" id="head_header">
+			<!--导航-->
+			<div class="navbar navbar-default default-menu menu" role="navigation">
+				<div class="container nav_container">
+					<div class="row">
+						<div class=" col-md-2 ">
+							<a class="navbar-brand default-logo" href="teacher.html">H	I	T</a>
+						</div>
+						<div class=" col-md-10 ">
+							<div class="collapse navbar-collapse  navbar-right" id="menu">
+								<ul class="nav navbar-nav" id="logged">
+									<li><a class="scroll" href="teacher.html">首页</a></li>
+									<li><a class="scroll" href="#event">管理活动</a></li>
+									<li><a class="scroll" href="javascript:void(0);" data-toggle="modal" data-target="#start_activity" >发布活动</a></li>
+									<li><a class="scroll" href="javascript:void(0);" data-toggle="modal" data-target="#change_announce">修改公告</a></li>
+									<li><a class="scroll" href="teacher_personal.html">通知</a></li>
+									<li><a class="scroll" href="javascript:void(0);">退出登录</a></li>
+									<li></li>
+								</ul>
+								<ul class="nav navbar-nav" id="unlog">
+									<li><a class="scroll" href="login.html">用户登录</a></li>
+									<li></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- end导航-->
+
+			<!--修改公告模态框开始-->
+			<div id="change_announce" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="change_modal" aria-hidden="true" data-backdrop="true">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="change_modal">修改公告通知</h4>
+					</div>
+					<div class="modal-body">
+						<!--修改公告标签页-->
+						<ul id="change_tab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#tab1" data-toggle="tab">公告一</a>
+							</li>
+							<li>
+								<a href="#tab2" data-toggle="tab">公告二</a>
+							</li>
+							<li>
+								<a href="#tab3" data-toggle="tab">公告三</a>
+							</li>
+						</ul>
+						<div id="change_tab_content" class="tab-content">
+							<div class="tab-pane fade in active" id="tab1">
+								<div class="input-group input-group-title">
+									<span class="input-group-addon">标题</span>
+									<input type="text" class="form-control" placeholder="请输入公告标题"/>
+								</div>
+								<br/>
+								<div class="input-group input-group-body">
+									<span class="input-group-addon">内容</span>
+									<textarea class="form-control" placeholder="请输入公告的内容"></textarea>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="tab2">
+								<div class="input-group input-group-title">
+									<span class="input-group-addon">标题</span>
+									<input type="text" class="form-control" placeholder="请输入公告标题" />
+								</div>
+								<br/>
+								<div class="input-group input-group-body">
+									<span class="input-group-addon">内容</span>
+									<textarea class="form-control" placeholder="请输入公告的内容" ></textarea>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="tab3">
+								<div class="input-group input-group-title">
+									<span class="input-group-addon">标题</span>
+									<input type="text" class="form-control" placeholder="请输入公告标题" />
+								</div>
+								<br/>
+								<div class="input-group input-group-body">
+									<span class="input-group-addon">内容</span>
+									<textarea class="form-control" placeholder="请输入公告的内容" ></textarea>
+								</div>
+							</div>
+						</div>
+						<!--标签页结束-->
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-success" data-dismiss="modal">更改</button>
+					</div>
+				</div>
+			</div>
+			<!--修改公告模态框结束-->
+
+			<!--发布活动模态框开始-->
+			<div class="modal fade" id="start_activity" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">发布公告面板</h4>
+						</div>
+						<div class="modal-body" id="start_modal">
+							<div class="input-group input-group-title">
+								<span class="input-group-addon">活动标题</span>
+								<input type="text" id="activity_title" class="form-control" placeholder="请输入活动的标题">
+							</div>
+
+							<span class="time">开始时间：<input type="text" placeholder="请点击来确定时间" value="" id="start_time" data-date-format="yyyy-mm-dd" class="form_datetime"></span>
+							<span class="time">截止日期：<input type="text" placeholder="请点击来确定时间" value="" id="end_time" data-date-format="yyyy-mm-dd" class="form_datetime"></span>
+							<span class="time">报名截止：<input type="text" placeholder="请点击来确定时间" value="" id="end_join" data-date-format="yyyy-mm-dd" class="form_datetime"></span><br/>
+							
+							<div class="input-group input-group-body">
+								<span class="input-group-addon">活动详介</span>
+								<textarea id="activity_content" class="form-control" placeholder="请输入活动详细内容、介绍等"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-success">发布</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--发布活动模态框结束-->
+		</div>
+		<!--滚动公告-->
+		<div class="head_content" id="head_content">
+			<div class="announce carousel slide" id="head_carousel">
+				<ol class="carousel-indicators">
+					<li data-target="#head_carousel" data-slide-to="0" class="active"></li>
+					<li data-target="#head_carousel" data-slide-to="1"></li>
+					<li data-target="#head_carousel" data-slide-to="2"></li>
+				</ol>
+				<div class="carousel-inner">
+					<div id="item1" class="item active">
+						<h4 class="carousel_caption">123</h4>
+						<p>123</p>
+					</div>
+					<div id="item2" class="item ">
+						<h4 class="carousel_caption">223</h4>
+						<p>333</p>
+					</div>
+					<div id="item3" class="item ">
+						<h4 class="carousel_caption">444</h4>
+						<p>555</p>
+					</div>
+				</div>
+			</div>
+		</div><!--滚动公告结束-->
+	</section>
+
+	<section class="content" id="event">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<div class="text-center">
+						<p class="small-tag">查看所有活动</p>
+						<h2 class="section-title">参与活动</h2>
+						<p class="section-para">你可以在下面查看所有的活动，包括所有正在进行和已经截止的。点击相关的活动可以查看活动的详细介绍，并选择你想要参加的活动进行管理</p>
+					</div>
+				</div>
+				<div class="col-md-7 col-md-offset-2">
+					<div class="eventlist">
+						<h3>暑期实习<span class="badge new">新活动</span></h3>
+						<div class="time"><span>开始时间：</span><span>截止时间：</span></div>
+						<span>活动简介：</span><p class="intro">中国辽宁大连东软暑期实习中国辽宁大连东软暑期实习中国辽宁大连东软暑期实习中国辽宁大连东软暑期实习中国辽宁大连东软暑期实习中国辽宁大连东软暑期实习中国辽宁大连东软暑期实习中国辽宁大连东软暑期实习中国辽宁大连东软暑期实习中国辽宁大连东软暑期实习......</p>
+						<a href="teacher_article.html">管理活动</a>
+					</div>
+				</div>
+				<div class="col-md-7 col-md-offset-2">
+					<div class="eventlist">
+						<h3>暑期实习<span class="badge over">已结束</span></h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</section>
+
+	<section class="footer">
+		<p>Harbin Institute of Technology</p>
+		<p>哈尔滨工业大学</p>
+		<p class="copyright">Copyright 2016. All Rights Reserved.</p>
+	</section>
+	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript">
+	$('#start_time').datetimepicker({
+		language:  'zh-CN',
+		weekStart: 1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+	});
+	$('#end_time').datetimepicker({
+		language:  'zh-CN',
+		weekStart: 1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+	});
+	$('#end_join').datetimepicker({
+		language:  'zh-CN',
+		weekStart: 1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+	});
+	</script>
+</body>
+</html>

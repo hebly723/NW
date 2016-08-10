@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>学生活动信息平台-个人中心</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/teacher_personal.css">
+	<link rel="stylesheet" type="text/css" href="../css/pickList.css">
+</head>
+
+<body>
+	<section class="locate">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-offset-1 col-md-5">
+					<span>您现在的位置：</span><a href="teacher.html">首页</a><span>——&gt;</span><a href="teacher_article.html">活动管理</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="personal">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2">
+					<ul class="list-group">
+						<li class="list-group-item"><a href="#information" data-toggle="tab">查看通知</a></li>
+						<li class="list-group-item"><a href="#send" data-toggle="tab">发送通知</a></li>
+						<li class="list-group-item"><a href="#changePassword" data-toggle="tab">修改密码</a></li>
+					</ul>
+				</div>
+				<div class="col-md-9">
+					<div class="tab-content">
+						<!--个人中心通知部分-->
+						<div class="tab-pane fade in active" id="information">
+							<div class="infor-item">
+								<p class="infor_person">通知人：周玉</p>
+								<p class="infor_time">通知时间：2016-7-17</p>
+								<p class="infor_content">内容：大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习</p>
+								<button class="response btn btn-primary" data-toggle="modal" data-target="#response">回复</button>
+							</div>
+
+							<!--回复框-->
+							<div class="modal fade" id="response" tebindex="-1" role="dialog" aria-labelledby="responseModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										</div>
+										<div class="modal-body">
+											<textarea class="form-control response_input" placeholder="在这里输入要回复的信息"></textarea>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+											<button type="button" class="btn btn-primary">发送</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--回复框结束-->
+						</div>
+						<!--个人中心通知部分结束-->
+
+<<<<<<< HEAD
+				<!--个人中心发送通知部分-->
+				<div class="tab-pane fade" id="send">
+					<form name="myform"> 
+						<table class="send_table"> 
+							<tr> 
+								<td class="list1_td"> 
+									<select multiple name="list1" class="list1 form-control" ondblclick="moveOption(document.myform.list1, document.myform.list2)">
+										<!--用forEach遍历出所有的option-->
+										<option value="北京">北京</option> 
+										<option value="上海">上海</option> 
+										<option value="山东">山东</option> 
+										<option value="安徽">安徽</option> 
+										<option value="重庆">重庆</option> 
+										<option value="福建">福建</option> 
+									</select> 
+								</td> 
+								<td class="button_td">
+									<input type="button" value="添加" onclick="moveOption(document.myform.list1, document.myform.list2)" class="btn btn-primary list_button">
+									<input type="button" value="全部添加" onclick="moveAllOption(document.myform.list1, document.myform.list2)" class="btn btn-primary list_button"><br/> 
+									<input type="button" value="移除" onclick="moveOption(document.myform.list2, document.myform.list1)" class="btn btn-primary list_button">
+									<input type="button" value="全部移除" onclick="moveAllOption(document.myform.list2, document.myform.list1)" class="btn btn-primary list_button"><br/>
+								</td> 
+								<td class="list2_td"> 
+									<select multiple name="list2" class="list2 form-control" ondblclick="moveOption(document.myform.list2, document.myform.list1)"> 
+									</select> 
+								</td> 
+								<td class="content_td">
+									<textarea class="form-control"></textarea>
+								</td>
+							</tr> 
+						</table> 
+					</form> 
+				</div>
+				<!--个人中心发送通知结束-->
+=======
+						<!--个人中心参与活动部分-->
+						<div class="tab-pane fade" id="send">
+							<div class="container">
+								<form name="myform"> 
+									<table class="send_table"> 
+										<tr> 
+											<td class="list1_td"> 
+												<select multiple name="list1" class="list1 form-control" ondblclick="moveOption(document.myform.list1, document.myform.list2)">
+													<!--用forEach遍历出所有的option-->
+													<option value="北京">北京</option> 
+													<option value="上海">上海</option> 
+													<option value="山东">山东</option> 
+													<option value="安徽">安徽</option> 
+													<option value="重庆">重庆</option> 
+													<option value="福建">福建</option> 
+												<select> 
+											</td> 
+											<td class="button_td">
+												<input type="button" value="添加" onclick="moveOption(document.myform.list1, document.myform.list2)" class="btn btn-primary list_button addone">
+												<input type="button" value="全部添加" onclick="moveAllOption(document.myform.list1, document.myform.list2)" class="btn btn-primary list_button addall"><br/> 
+												<input type="button" value="移除" onclick="moveOption(document.myform.list2, document.myform.list1)" class="btn btn-primary list_button removeone">
+												<input type="button" value="全部移除" onclick="moveAllOption(document.myform.list2, document.myform.list1)" class="btn btn-primary list_button removeall"><br/>
+											</td> 
+											<td class="list2_td"> 
+												<select multiple name="list2" class="list2 form-control" ondblclick="moveOption(document.myform.list2, document.myform.list1)"> 
+												<select> 
+											</td> 
+										</tr> 
+									</table> 
+									<textarea class="form-control send_textarea" placeholder="请输入要发送的通知的内容"></textarea>
+									<button class="btn btn-success send_btn">发送</button>
+								</form> 
+							</div>
+						</div>
+						<!--个人中心参与部分结束-->
+>>>>>>> 10840d58c5a1be419f2a88c93bb9444d3f4f398d
+
+						<!--个人中心修改密码部分-->
+						<div class="tab-pane fade" id="changePassword">
+							<input type="password" placeholder="请输入新密码" class="password1 form-control">
+							<input type="password" placeholder="请确认新密码" class="password2 form-control">
+							<button class="btn btn-success">确定</button>
+						</div>
+						<!--个人中心修改密码结束-->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/pickList.js"></script>
+<script type="text/javascript">
+<!--操作全部-->
+function moveAllOption(e1, e2){ 
+	var fromObjOptions=e1.options; 
+	for(var i=0;i<fromObjOptions.length;i++){ 
+		fromObjOptions[0].selected=true; 
+		e2.appendChild(fromObjOptions[i]); 
+		i--; 
+	} 
+	document.myform.city.value=getvalue(document.myform.list2); 
+}
+
+<!--操作单个-->
+function moveOption(e1, e2){ 
+	var fromObjOptions=e1.options; 
+	for(var i=0;i<fromObjOptions.length;i++){ 
+		if(fromObjOptions[i].selected){ 
+			e2.appendChild(fromObjOptions[i]); 
+			i--; 
+		} 
+	} 
+	document.myform.city.value=getvalue(document.myform.list2); 
+} 
+
+function getvalue(geto){ 
+	var allvalue = ""; 
+	for(var i=0;i<geto.options.length;i++){ 
+		allvalue +=geto.options[i].value + ","; 
+	} 
+	return allvalue; 
+} 
+
+function changepos1111(obj,index) 
+{ 
+	if(index==-1){ 
+		if (obj.selectedIndex>0){ 
+			obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex-1)) 
+		} 
+	} 
+	else if(index==1){ 
+		if (obj.selectedIndex<obj.options.length-1){ 
+			obj.options(obj.selectedIndex).swapNode(obj.options(obj.selectedIndex+1)) 
+		} 
+	} 
+} 
+
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+body{
+	background-image: url(../img/index/hit1.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-color: #FFFBF0;
+	min-height: 600px;
+}
+.locate{
+	font-size: 16px;
+	position: relative;
+	margin-top: 150px;
+	width:350px;
+	border-bottom: 2px #aaa solid;
+	color:#121212;
+}
+.article{
+	padding:50px;
+	min-height: 300px;
+	width:800px;
+	background-color: rgba(255,251,240,0.7);
+	margin-top:50px;
+	font-size: 15px;
+	font-family: "微软雅黑";
+}
+.article a{
+	text-decoration: none;
+}
+.article_title{
+	font-family: "微软雅黑";
+	font-size: 28px;
+	color:#121212;
+	margin-bottom: 30px;
+}
+.time{
+	display:inline-block;
+	margin-bottom: 10px;
+	font-size: 16px;
+	color:green;
+	margin-right: 20px;
+}
+.article_content{
+	letter-spacing: 1px;
+	font-family: "微软雅黑";
+	font-size: 15px;
+}
+.attention{
+	margin-top: 10px;
+	color:red;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+#file{
+	display:inline;
+	border:1px #aaa solid;
+}
+#upload{
+	display:inline;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>学生活动信息平台-个人中心</title>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/student_personal.css">
+</head>
+
+<body>
+	
+	<section class="locate">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-offset-1 col-md-5">
+					<span>您现在的位置：</span><a href="student.html">首页</a><span>——&gt;</span><a href="student_article.html">活动详情</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="personal">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2">
+					<ul class="list-group">
+						<li class="list-group-item"><a href="#information" data-toggle="tab">查看通知</a></li>
+						<li class="list-group-item"><a href="#join" data-toggle="tab">我参与的</a></li>
+						<li class="list-group-item"><a href="#changePassword" data-toggle="tab">修改密码</a></li>
+					</ul>
+				</div>
+				<div class="col-md-9">
+						<div class="tab-content">
+							<!--个人中心通知部分-->
+							<div class="tab-pane fade in active" id="information">
+								<div class="infor-item">
+									<p class="infor_person">通知人：周玉</p>
+									<p class="infor_time">通知时间：2016-7-17</p>
+									<p class="infor_content">内容：大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习大连实习</p>
+									<button class="response btn btn-primary" data-toggle="modal" data-target="#response">回复</button>
+								</div>
+
+								<!--回复框-->
+								<div class="modal fade" id="response" tebindex="-1" role="dialog" aria-labelledby="responseModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											</div>
+											<div class="modal-body">
+												<textarea class="form-control response_input" placeholder="在这里输入要回复的信息"></textarea>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+												<button type="button" class="btn btn-primary">发送</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--回复框结束-->
+							</div>
+							<!--个人中心通知部分结束-->
+
+							<!--个人中心参与活动部分-->
+							<div class="tab-pane fade" id="join">
+								<div class="join-item">
+									<p class="join_time">报名时间：</p>
+									<p class="join_event">项目名称：</p>
+								</div>
+							</div>
+							<!--个人中心参与部分结束-->
+
+							<!--个人中心修改密码部分-->
+							<div class="tab-pane fade" id="changePassword">
+								<input type="password" placeholder="请输入新密码" class="password1 form-control">
+								<input type="password" placeholder="请确认新密码" class="password2 form-control">
+								<button class="btn btn-success">确定</button>
+							</div>
+							<!--个人中心修改密码结束-->
+						</div>
+					<!--个人中心右侧结束-->
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+</body>
+</html>

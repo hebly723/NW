@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>哈工大学生活动信息平台</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body>
+<content>
+	<div class="content">
+		<form id="login_input">
+			<h1>用户登录</h1>
+			<div>
+				<input type="text" placeholder="请输入学号" required="" id="login_username" class="username" />
+			</div>
+			<div>
+				<input type="password" placeholder="请输入密码" required="" id="login_password" class="password" />
+			</div>
+			<div>
+				<input type="submit" value="登  录" class="login_button" onClick="login()" />
+				<a href="javascript:void(0);" class="forget">忘记密码</a>
+				<a href="javascript:void(0);" class="goto_register" onClick="goto_register()">前往注册</a>
+			</div>
+		</form>
+		<form id="register_input">
+			<h1>用户注册</h1>
+			<div>
+				<input type="text" placeholder="请输入学号作为用户名" required="" id="register_username" class="username" />
+				<input type="text" placeholder="请输入密码" required="" id="register_password1" class="password" />
+				<input type="text" placeholder="请确认密码" required="" id="register_password2" class="password" />
+			</div>
+			<div>
+				<input type="submit" value="注   册" class="register_button" onClick="register()" />
+				<a href="javascript:void(0);" onClick="goto_login()">已有账号?去登录</a>
+			</div>
+		</form>
+		<div class="button">
+			<a href="javascript:void(0);"data-toggle="modal" data-target="#notice">查看平台简介</a>
+		</div>
+	</div>
+	<!--公告模态框-->
+	<div class="modal fade" id="notice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" 
+					data-dismiss="modal" aria-hidden="true">
+					&times;
+					</button>
+					<h5 class="modal-title" id="myModalLabel">
+					哈尔滨工业大学
+					<br>
+					学生活动信息管理平台
+					</h5>
+				</div>
+				<div class="modal-body notice_body">
+					<p>暂无通告</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" 
+					data-dismiss="modal">关闭
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+</content>
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	var goto_register = function(){
+		$("#login_input").css("display","none");
+		$("#register_input").css("display","block");
+	}
+	var goto_login = function(){
+		$("#login_input").css("display","block");
+		$("#register_input").css("display","none");
+	}
+</script>
+
+</body>
+</html>
