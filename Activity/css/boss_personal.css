@@ -3,7 +3,6 @@ body{
 	background-size: 100%;
 	background-repeat: no-repeat;
 	background-color: #FFFBF0;
-	min-height: 600px;
 }
 .locate{
 	font-size: 16px;
@@ -13,23 +12,24 @@ body{
 	width:350px;
 	border-bottom: 2px #aaa solid;
 }
-
-.personal{
-	margin-top: 100px;
-}
-
-.list-group{
-	background-color: rgba(0,0,0,0.2);
+#personal{
+	margin-top: 50px;
 }
 
 .list-group-item a{
 	color:#121212;
 	font-size: 16px;
 }
-
+.personal_right{
+	position: absolute;
+	width:800px;
+	margin-left: 300px;
+	margin-top: 150px;
+	min-height: 500px;
+}
 .tab-pane{
 	border:1px #ccc solid;
-	background-color: rgba(255,251,240,0.6);
+	background-color: rgba(255,251,240,0.5);
 	padding:50px;
 }
 .password1,.password2{
@@ -79,10 +79,62 @@ body{
 	width:600px;
 	margin:0 auto 20px;
 	padding:10px;
-	background-color: rgba(0,0,0,0.1);
-}
-.join-item{
-	font-size: 16px;
 	color:#121212;
-	letter-spacing: 1px;
+	background-color: rgba(143,201,63,0.2);
+}
+
+
+.list1_td{
+	width:250px;
+}
+.list1{
+	width:200px;
+	height:200px;
+}
+.button_td{
+	width:150px;
+}
+.list2_td{
+	width:200px;
+}
+.list2{
+	width:200px;
+	height:200px;
+}
+.list1_td{
+	width:200px;
+}
+.list2_td{
+	width:200px;
+}
+.button_td input{
+	display:inline;
+	margin-left: 15px;
+	margin-right: 30px;
+	margin-top: 10px;
+}
+
+.send_textarea{
+	width:500px;
+	height:400px;
+	margin-top: 20px;
+	display:inline-block;
+}
+.send_btn{
+	margin-top: -50px;
+	margin-left: 30px;
+}
+
+#check a{
+	color:#121212;
+	font-size: 16px;
+}
+#check a:hover{
+	color:#121212;
+}
+#check a:link{
+	color:#121212;
+}
+#check a:visited{
+	color:#121212;
 }

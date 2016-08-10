@@ -150,7 +150,6 @@
 .time{
     display:block;
     margin-top: 15px;
-    margin-left: 50px;
 }
 #activity_content{
     resize:none;
@@ -192,9 +191,6 @@ h2.section-title{
 }
 
 .eventlist{
-    width:800px;
-    height:180px;
-    margin:0 auto;
     background-color: rgba(153,153,153,0.1);
     transition:background-color 1.5s;
     transition:color 1.5s background-color 1.5s;
@@ -218,7 +214,7 @@ h2.section-title{
     float:right;
     line-height: 40px;
     margin-right: 20px;
-    margin-top: 15px;
+    margin-top: 20px;
     width:100px;
     height:40px;
     border:1px white solid;

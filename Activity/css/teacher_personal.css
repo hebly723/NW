@@ -82,34 +82,32 @@ body{
 	color:#121212;
 	background-color: rgba(143,201,63,0.2);
 }
-<<<<<<< HEAD
-.send_table{
-	width:800px;
-	margin:0 auto;
-}
+
 .list1_td{
 	width:250px;
 }
 .list1{
-	width:250px;
+	width:200px;
+	height:200px;
 }
 .button_td{
 	width:150px;
 }
 .list2_td{
-	width:300px;
+	width:200px;
 }
 .list2{
-	width:250px;
-=======
-
+	width:200px;
+	height:200px;
+}
 .list1_td{
-	width:250px;
+	width:200px;
 }
 .list2_td{
-	width:250px;
+	width:200px;
 }
 .button_td input{
+	display:inline;
 	margin-left: 15px;
 	margin-right: 30px;
 	margin-top: 10px;
@@ -124,5 +122,5 @@ body{
 .send_btn{
 	margin-top: -50px;
 	margin-left: 30px;
->>>>>>> 10840d58c5a1be419f2a88c93bb9444d3f4f398d
+}
 }
